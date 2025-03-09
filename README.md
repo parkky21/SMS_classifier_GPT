@@ -31,7 +31,7 @@ Hey, mom I would be late today. Going to have dinner at Jimmy's place!
 ```
 #### ✅ Model Prediction:
 ```text
-Ham
+Not spam
 ```
 ---
 
