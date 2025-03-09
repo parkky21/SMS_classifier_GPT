@@ -37,15 +37,21 @@ Ham
 
 ## 📌 Implementation Code
 ```python
-import torch
-
-def classify_review(text, model, tokenizer, device, max_length):
+def classify_review(text, model, tokenizer, device, max_length=None, pad_token_id=50256):
     model.eval()
-    inputs = tokenizer.encode(text, return_tensors="pt", max_length=max_length, truncation=True).to(device)
+
+    input_ids = tokenizer.encode(text)
+    supported_context_length = model.pos_emb.weight.shape[0]
+
+    input_ids = input_ids[:min(max_length, supported_context_length)]
+
+    input_ids += [pad_token_id] * (max_length - len(input_ids))
+    input_tensor = torch.tensor(input_ids, device=device).unsqueeze(0) # add batch dimension
+
     with torch.no_grad():
-        outputs = model(inputs)
-    prediction = torch.argmax(outputs.logits, dim=-1).item()
-    return "Spam" if prediction == 1 else "Ham"
+        logits = model(input_tensor)[:, -1, :]  # Logits of the last output token
+    predicted_label = torch.argmax(logits, dim=-1).item()
+    return "spam" if predicted_label == 1 else "not spam"
 ```
 
 ## 📊 Model Performance
