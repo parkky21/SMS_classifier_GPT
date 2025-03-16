@@ -5,7 +5,6 @@ This project demonstrates SMS classification using a fine-tuned GPT-2 (125M) mod
 
 ## 🛠 Model Details
 - **Model Used**: GPT-2 (125M)
-- **Dataset**: A balanced sarcasm dataset with `merged_comments` and `labels`
 - **Tokenizer**: GPT-2 Tokenizer
 - **Max Context Length**: 1024 tokens
 - **Device**: CUDA (GPU) for fast inference
@@ -16,7 +15,8 @@ The following examples showcase the model's classification on real-world SMS sam
 ### **Example 1: Spam SMS**
 #### 📩 Input SMS:
 ```text
-Final Match Alert! Watch Ind vs NZ LIVE in HD on JioHotstar with Vi pack of Rs169. Get 3months JioHotstar+8GB data
+Final Match Alert! Watch Ind vs NZ LIVE in HD on JioHotstar
+with Vi pack of Rs169. Get 3months JioHotstar+8GB data
 ```
 #### ✅ Model Prediction:
 ```text
@@ -27,7 +27,8 @@ Spam
 ### **Example 2: Ham (Legitimate) SMS**
 #### 📩 Input SMS:
 ```text
-Hey, mom I would be late today. Going to have dinner at Jimmy's place!
+Hey, mom I would be late today. Going to have dinner
+at Jimmy's place!
 ```
 #### ✅ Model Prediction:
 ```text
